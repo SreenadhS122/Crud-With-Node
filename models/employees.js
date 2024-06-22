@@ -14,7 +14,7 @@ const employeeSchema = new Schema({
         email : {
             type : String
         },
-        phone : {
+        mobile : {
             type : String
         },
         dob : {
@@ -46,9 +46,12 @@ const employeeSchema = new Schema({
         },
         avatar : {
             type : String
+        },
+        admin : {
+            type : Boolean
         }
 });
 
 const employees = model("employee",employeeSchema);
 
-module.exports = {employees};
+module.exports = employees;

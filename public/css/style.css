@@ -104,6 +104,13 @@ td{
     gap: 30px;
     font-size: 16px;
     color: white 70%;
+    text-decoration: none;
+    font-weight: 500;
+}
+.side-bar-link{
+    font-size: 16px;
+    color: white 70% !important;
+    text-decoration: none;
     font-weight: 500;
 }
 .rounded{
@@ -187,9 +194,7 @@ input:focus,select:focus,textarea:focus{
   'GRAD' 0,
   'opsz' 24
 }
-.avatar-preview{
-    display: none;
-}
+
 .addemployee-popup-container{
     justify-content: center;
     width: 100%;
