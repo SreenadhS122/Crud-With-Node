@@ -1,8 +1,7 @@
 const employees = require('../models/employees');
 const bcrypt = require('bcrypt');
-const { json } = require('body-parser');
-const mongoose  = require('mongoose');
 const nodemailer = require('nodemailer');
+const otpSend = require('../services/otp');
 let employee,otp;
 
 const registerPage = (req,res) => {
@@ -42,23 +41,7 @@ const register = async (req,res) => {
                     password : bcrypt.hashSync(password,10),
                     admin : false
                 });
-                const transporter = nodemailer.createTransport({
-                    service : "gmail",
-                    host : "smtp.gmail.com",
-                    port : 587,
-                    secure : false,
-                    auth : {
-                        user : process.env.MAIL_USER,
-                        pass : process.env.MAIL_PASS
-                    }
-                });
-                await transporter.sendMail({
-                    from: process.env.MAIL_USER, 
-                    to: [email,"sree2002cr@gmail.com"],
-                    subject: "Login OTP", 
-                    text: "OTP",
-                    html: `<b>${otp}</b><h3> is your login otp</h3>`
-                });
+                otpSend(email,otp);
                 res.render('otp',{msg:null});
             }
         }else{
@@ -76,14 +59,14 @@ const otpVerification = async (req,res) => {
     }
 }
 const editEmployeeForm = async (req,res) => {
-    const{id} = req.params;
-    const employee = await employees.findOne({_id : id});
+    const {id} = req.params;
+    const employee = await employees.findOne({_id:id});
     res.render("editEmployee",{employee:employee,msg:null});
 }
 const editEmployee = async (req,res) => {
     const {id} = req.params;
-    const employee = await employees.findOne({_id : id});
-    console.log(employee);
+    const employee = await employees.findOne({_id:id});
+    console.log(req.body);
     const {salutation,firstname,lastname,email,mobile,dob,gender,address,qualifications,country,state,city,username,password} = req.body;
     if(salutation == "Select"||firstname.trim() == "" || lastname.trim() == "" || email.trim() == "" || mobile.trim() == "" || dob.trim() == "" || address.trim() == "" || qualifications.trim() == "" || country == "Select" || state == "Select" || city.trim() == "" || username.trim() == "" || password.trim() == "" || ! "gender" in req.body){
         res.render("editEmployee",{msg:"Fields cannot be empty..",employee:employee});

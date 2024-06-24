@@ -199,15 +199,15 @@ input:focus,select:focus,textarea:focus{
     justify-content: center;
     width: 100%;
     height: 100%;
-    position:fixed;
-    display: none;
     transition: all ease-in;
-    overflow-y: scroll;
     z-index: 2;
+    display: flex;
 }
 .addemployee-popup{
-    width: 50%;
     height: fit-content;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
 }
 .close-btn{
     width:37px;
