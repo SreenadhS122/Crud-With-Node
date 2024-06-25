@@ -14,10 +14,10 @@ const login = async (req,res) => {
             const employee = await employees.findOne({email:email});
             if(bcrypt.compareSync(password,employee.password)){
                 if(employee.admin){
-                    res.send("admin");
+                    res.redirect('/admin/dashboard');
                 }else{
                     console.log(employee);
-                    res.render("view",{employee: employee});
+                    res.render("myProfile",{employee: employee});
                 }
             }else{
                 res.render("login",{msg:"Invalid password",email:employee.email});
@@ -25,7 +25,7 @@ const login = async (req,res) => {
         }else{
             const admin = await admins.findOne();
             if(admin.email == email && bcrypt.compareSync(password,admin.password)){
-                res.send("admin");
+                res.redirect('/admin/dashboard');
             }else{
                 res.render("login",{msg:"Invalid credentials",email:null});
             }

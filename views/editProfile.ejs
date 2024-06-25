@@ -25,27 +25,15 @@
               <ul class="sidebar-items pt-3">
                 <li class="d-flex align-items-center gap-1" >
                   <span class="material-symbols-outlined" style="color: white;">
-                    home
-                    </span>
-                    <h6 style="margin: 0;">Dashboard</h6>
-                </li>
-                <li class="d-flex align-items-center gap-1" >
-                  <span class="material-symbols-outlined" style="color: white;">
-                    bar_chart_4_bars
-                    </span>
-                    <h6 style="margin: 0;">Employees</h6>
-                </li>
-                <li class="d-flex align-items-center gap-1" >
-                  <span class="material-symbols-outlined" style="color: white;">
                     person
                     </span>
-                    <h6 style="margin: 0;">My Profile</h6>
+                    <a href="/employee/<%= employee._id %>" class="side-bar-link" style="color: white;">My Profile</a>
                 </li>
                 <li class="d-flex align-items-center gap-1" >
                   <span class="material-symbols-outlined" style="color: white;">
                     lock_open
                     </span>
-                    <h6 style="margin: 0;">Logout</h6>
+                    <a href="/logout" class="side-bar-link" style="color: white;">Logout</a>
                 </li>
             </ul>
               </div>
@@ -79,7 +67,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
                 <% } %>
-               <form class="pt-1" id="employeeForm" action="/admin/editEmployee/<%= employee._id %>" method="post" enctype="multipart/form-data">
+               <form class="pt-1" id="employeeForm" action="/employee/editProfile/<%= employee._id %>" method="post" enctype="multipart/form-data">
                    <div class="form-group pt-2">
                     <div class="align-items-center" id="edit-image">
                       <div class="edit-image">
@@ -204,7 +192,7 @@
                    </div>
                    </div>
                    <div class="d-flex justify-content-end align-items-center pt-3">
-                    <a href="/admin/dashboard" class="btn close-button p-2">Close</a>
+                    <a href="/employee/<%= employee._id %>" class="btn close-button p-2">Close</a>
                     <button type="submit" class="btn success-btn mx-1 p-2" id="button-dia">Save Changes</button>
                     <input type="text" style="display: none;" name="" id="empid">
                   </div>

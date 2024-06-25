@@ -5,10 +5,10 @@ const employeeSchema = new Schema({
         salutation: {
             type : String
         },
-        firstName : {
+        firstname : {
             type : String
         },
-        lastName : {
+        lastname : {
             type : String
         },
         email : {

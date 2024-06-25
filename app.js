@@ -6,6 +6,8 @@ const logger = require('morgan');
 const {mongo} = require('./dbConnect/dbConnect');
 const loginRoute = require('./routes/login');
 const employeeRoute = require('./routes/employeeRoute');
+const adminRoute = require('./routes/adminRoute');
+
 require('dotenv').config();
 
 app.set('view engine','ejs');
@@ -21,7 +23,8 @@ app.use(session({
 app.use(cache());
 app.use(logger('dev'));
 app.use('/',loginRoute);
-app.use('/',employeeRoute);
+app.use('/employee',employeeRoute);
+app.use('/admin',adminRoute);
 
 mongo();
 app.listen(process.env.PORT || 8080);

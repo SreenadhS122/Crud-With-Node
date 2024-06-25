@@ -27,7 +27,7 @@
                   <span class="material-symbols-outlined" style="color: white;">
                     person
                     </span>
-                    <a href="<%= employee/employee._id %>" class="side-bar-link" style="color: white;">My Profile</a>
+                    <a href="/employee/<%= employee._id %>" class="side-bar-link" style="color: white;">My Profile</a>
                 </li>
                 <li class="d-flex align-items-center gap-1" >
                   <span class="material-symbols-outlined" style="color: white;">
@@ -51,7 +51,7 @@
                       Employee/Profile
                   </h6>
                   <h1 class="employee-heading">
-                      MY Profile
+                    Profile
                   </h1>
                 </div>
                 </div>
@@ -62,7 +62,7 @@
                         <img src="/images/Background Image.png" alt="" class="cover-img">
                         <div class="profile-pic">
                           <img src="/images/avatar/<%= employee.avatar %>" alt="" id="employee-pic">
-                          <h4 id="view-name"><%= employee.firstName  %></h4>
+                          <h4 id="view-name"><%= employee.salutation %> <%= employee.firstname  %> <%= employee.lastname %></h4>
                           <p id="view-email"><%= employee.email %></p>
                           <img src="" alt="">
                         </div>
@@ -107,10 +107,7 @@
                           <input type="text" name="" id="view-empid" style="display: none;">
                           <div id="employee-table" style="display: none;"></div>
                           <div id="limit-of-employee" style="display: none;"></div>
-                          <a href="/editEmployee/<%= employee._id %>" class="btn success-btn">Edit Details</a>
-                          <% if (employee.admin) { %>
-                            <a href="/deleteEmployee/<%= employee._id %>" class="btn danger-btn mx-1">Delete</a>
-                          <% } %>
+                          <a href="/employee/editProfile/<%= employee._id %>" class="btn success-btn">Edit Details</a>
                         </div>
                       </div>
                     </div>

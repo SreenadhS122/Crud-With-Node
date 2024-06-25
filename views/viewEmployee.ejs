@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="main" id="main">
+          <div class="d-flex w-100">
+            <div class="side-bar pt-5 pb-2 px-4 d-flex flex-column justify-content-between">
+              <div>
+                <h3 style="max-width: 214px;" class="fw-7">
+                  Employee
+                  <span class="fw-3">
+                      Management
+                  </span>
+              </h3>
+              <hr class="mt-4">
+              <ul class="sidebar-items pt-3">
+                <li class="d-flex align-items-center gap-1" >
+                  <span class="material-symbols-outlined" style="color: white;">
+                    home
+                    </span>
+                    <h6 style="margin: 0;">Dashboard</h6>
+                </li>
+                <li class="d-flex align-items-center gap-1" >
+                  <span class="material-symbols-outlined" style="color: white;">
+                    bar_chart_4_bars
+                    </span>
+                    <h6 style="margin: 0;">Employees</h6>
+                </li>
+                <li class="d-flex align-items-center gap-1" >
+                  <span class="material-symbols-outlined" style="color: white;">
+                    person
+                    </span>
+                    <h6 style="margin: 0;">My Profile</h6>
+                </li>
+                <li class="d-flex align-items-center gap-1" >
+                  <span class="material-symbols-outlined" style="color: white;">
+                    lock_open
+                    </span>
+                    <h6 style="margin: 0;">Logout</h6>
+                </li>
+            </ul>
+              </div>
+                <div class="d-flex gap-1 align-items-center">
+                  <hr style="background-color: white;">
+                  <p class="side-bar-footer">Powered by</p>
+                  <img src="/images/stackuplogo.png" alt="">
+                </div>
+            </div>
+          <div class="main-menu w-100">
+            <div>
+              <div class="d-flex justify-content-between p-5 align-items-center">
+                <div>
+                  <h6 class="txt-light">
+                      Employee/Profile
+                  </h6>
+                  <h1 class="employee-heading">
+                   Employee Profile
+                  </h1>
+                </div>
+                </div>
+                <div class="d-flex justify-content-center p-5">
+                  <div class="row mx-5 viewed-user d-flex flex-column align-items-center m-auto">
+                    <div class="p-3">
+                      <div class="top-section col-lg-12"> 
+                        <img src="/images/Background Image.png" alt="" class="cover-img">
+                        <div class="profile-pic">
+                          <img src="/images/avatar/<%= employee.avatar %>" alt="" id="employee-pic">
+                          <h4 id="view-name"><%= employee.firstname  %></h4>
+                          <p id="view-email"><%= employee.email %></p>
+                          <img src="" alt="">
+                        </div>
+                       
+                      </div>
+                      <div class="row align-items-center justify-content-center m-0 gap-5">
+                        <div class="row col-lg-12 gap-2 justify-content-center">
+                          <div class="col-lg-4 bx-shadow py-2">
+                              <h6>Gender</h6>
+                              <h5 id="view-gender"><%= employee.gender %></h5>
+                          </div>
+                          <div class="col-lg-4 bx-shadow py-2">
+                            <h6>Age</h6>
+                            <h5 id="view-age"><%= employee.dob %></h5>
+                        </div>
+                        <div class="col-lg-4 bx-shadow py-2">
+                          <h6>Date of Birth</h6>
+                          <h5 id="view-dob"><%= employee.dob %></h5>
+                      </div>
+                        </div>
+                        <div class="row col-lg-12 gap-3 justify-content-center">
+                          <div class="col-lg-6 bx-shadow py-2">
+                            <h6>Mobile Number</h6>
+                            <h5 id="view-mobile"><%= employee.mobile %></h5>
+                          </div>
+                          <div class="col-lg-6 bx-shadow py-2">
+                            <h6>Qualifications</h6>
+                            <h5 id="view-qualifications"><%= employee.qualifications %></h5>
+                          </div>
+                        </div>
+                        <div class="row col-lg-12 gap-3 justify-content-center">
+                          <div class="col-lg-6 bx-shadow py-2">
+                            <h6>Address</h6>
+                            <h5 id="view-address"><%= employee.address %></h5>
+                          </div>
+                          <div class="col-lg-6 bx-shadow py-2">
+                            <h6>Username</h6>
+                            <h5 id="view-username"><%= employee.username %></h5>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-end col-lg-12 py-2">
+                          <input type="text" name="" id="view-empid" style="display: none;">
+                          <div id="employee-table" style="display: none;"></div>
+                          <div id="limit-of-employee" style="display: none;"></div>
+                          <a href="/admin/deleteEmployee/<%= employee._id %>" class="btn danger-btn">Delete</a>
+                          <a href="/admin/editEmployee/<%= employee._id %>" class="btn success-btn">Edit Details</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center px-3">
+              <p>
+                © 2023 All Rights Reserved. Stackup
+              </p>
+              <div class="d-flex">
+                <p>
+                  Terms of Use
+                </p>
+                <p class="px-1">
+                  Privacy Policy
+                </p>
+              </div>
+            </div>
+          </div>
+          </div>
+         </div>
+         <div id="total" style="display: none;"></div>
+         <div id="search" style="display: none;"></div>
+         <div id="pagination-number" style="display: none;"></div>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>         
+         <script src="/js/script.js" ></script>
+    </body>
+</html>
