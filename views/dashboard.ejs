@@ -79,7 +79,7 @@
         <div class="p-3 d-flex justify-content-between">
             <div class="d-flex gap-3 align-items-center">
                 <h4 class="txt-dark">Employee List</h4>
-                <input type="number" id="limit-of-employee" class="number-of-employee px-1" value="3">
+                <input type="number" id="limit-of-employee" class="number-of-employee px-1" min="1" value="<%= value  %>" onchange="limitOfEmployee()">
                 <span id="total"></span>
             </div>
             <a href="/admin/addEmployee" class="btn btn-clr clr-white text-small fw-7 p-3 btn-round">Add Employee</a>
@@ -101,12 +101,16 @@
           <% if(employee.length){%>
             <% employee.forEach((element,index) => { %>
               <tr class='tableitems'>
-                <th><%= index+1 %></th>
-                <td class='img-nd-name'><img class="employee-img" id="picture" src="/images/avatar/<%= element.avatar %>" alt=""><p style="color: #2B3674;"><%= element.salutation %> <%= element.firstname %> <%= element.lastname %></p></td>
+                <th><%= index+((limit-1)*value) %></th>
+                <td class='img-nd-name'><img class="employee-img" id="picture" <% if (element.avatar) { %>
+                  src="/images/avatar/<%= element.avatar %>"
+                <% }else{ %>
+                  src="/images/dummy-profile-pic.jpg"
+                  <% } %> alt=""><p style="color: #2B3674;"><%= element.salutation %> <%= element.firstname %> <%= element.lastname %></p></td>
                 <td><%= element.email %></td>
                 <td><%= element.mobile %></td>
                 <td><%= element.gender %></td>
-                <td><%= element.dob %></td>
+                <td><%= element.dob.split("-").reverse().join("-") %></td>
                 <td><%= element.country %></td>
                 <td>
                 <div class="dropdown">
@@ -154,22 +158,19 @@
         </tbody>
       </table>
       </div>
-      <nav aria-label="Page navigation example" class="d-flex justify-content-end px-5">
-        <ul class="pagination" id="pagination-prev">
+      <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+        <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous" onclick="pages('start')" id="page-start">
+            <a class="page-link" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only"></span>
             </a>
           </li>
-        </ul>
-        <ul class="pagination" id="pagination-number">
-        </ul>
-        <ul class="pagination" id="pagination-prev">
+        <% for(let i=1;i<=limit;i++){ %>
+          <li class="page-item"><a class="page-link" id="pagination-admin" onclick="pagination(<%= i %>)" style="cursor: pointer;"><%= i %></a></li>
+          <% } %>
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next" onclick="pages('end')" id="page-end">
+            <a class="page-link" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only"></span>
             </a>
           </li>
         </ul>

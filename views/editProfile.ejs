@@ -56,32 +56,25 @@
                   <div class="addemployee-popup-container p-4" id="addemployeePopup">
                 <div class="addemployee-popup bg-body px-4 py-4" id="addemployee-popup">
                   <div class="d-flex justify-content-between">
-                    <h3 id="form-heading">Edit</h3>
+                    <h3 id="form-heading">Edit Profile</h3>
                     <a style="text-decoration: none;" class="close-btn d-flex justify-content-center align-items-center"><span class="material-symbols-outlined">
                       close
                       </span></a>
                   </div>
+                  <hr style="background-color: blue; height: 2px;width: 100%;">
                   <% if (msg) { %>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong><%= msg %>!</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
                 <% } %>
-               <form class="pt-1" id="employeeForm" action="/employee/editProfile/<%= employee._id %>" method="post" enctype="multipart/form-data">
+               <form class="pt-1" id="employeeForm" action="/employee/editProfile/<%= employee._id %>" method="post">
                    <div class="form-group pt-2">
-                    <div class="align-items-center" id="edit-image">
-                      <div class="edit-image">
-                        <img class="emp-edit-img p-3" src="/images/avatar/<%= employee.avatar %>" alt="error occured" id="editpic">  
-                      </div>
-                      <input type="file" style="display: none;" id="editimg" name="avatar" onchange="editImageChange()">
-                      <label class="change-btn mx-1" style="display: flex; align-items: center; justify-content: center;text-align: center;" for="editimg">Change</label>
-                    </div>
-                       
                        <div class="row pt-3">
                            <div class="w-md-100 col-xl-2 col-lg-2 col-md-12 pt-2">
                                <label for="inputState" class="form-label">Salutation</label>
                                <select id="salutation" class="form-select" name="salutation">
-                                 <option value="<%= employee.salutation %>"><%= employee.salutation %></option>
+                                 <option value="<%= salutation %>"><%= salutation %></option>
                                  <option value="Mr">Mr</option>
                                  <option value="Ms">Ms</option>
                                 </select>
@@ -89,43 +82,43 @@
                              </div>
                    <div class="w-md-100 form-group col-lg-5 col-md-12 pt-2">
                      <label class="form-label">First Name</label>
-                     <input type="text" class="form-control" id="firstname" placeholder="John" name="firstname" value="<%= employee.firstname %>">
+                     <input type="text" class="form-control" id="firstname" placeholder="John" name="firstname" value="<%= firstname %>">
                      <p id="firstnameVal"></p>
                    </div>
                    <div class="w-md-100 form-group col-lg-5 col-md-12 pt-2">
                        <label class="form-label">Last Name</label>
-                       <input type="text" class="form-control" id="lastname"  placeholder="Doe" name="lastname" value="<%= employee.lastname %>">
+                       <input type="text" class="form-control" id="lastname"  placeholder="Doe" name="lastname" value="<%= lastname %>">
                        <p id="lastnameVal"></p>
                      </div>
                      </div>
                        <div class="row pt-1">
                              <div class="form-row col-lg-6 col-md-12 pt-2">
                        <label for="inputEmail4" class="form-label">Email Address</label>
-                       <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%= employee.email %>">
+                       <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%= email %>">
                        <p id="emailVal"></p>
                      </div>
                      <div class="form-group col-lg-6 col-md-12 pt-2">
                        <label for="inputPassword4" class="form-label">Mobile Number</label>
-                       <input type="text" class="form-control" id="mobile" placeholder="Mobile" max="10" name="mobile" value="<%= employee.mobile %>">
+                       <input type="text" class="form-control" id="mobile" placeholder="Mobile" max="10" name="mobile" value="<%= mobile %>">
                        <p id="mobileVal"></p>
                      </div>
                        </div>
                        <div class="row pt-1">
                          <div class="form-row col-lg-6 col-md-12 pt-2">
                    <label for="dob" class="form-label">Date Of Birth</label>
-                   <input type="date" class="form-control" id="dob" name="dob" value="<%= employee.dob %>">
+                   <input type="date" class="form-control" id="dob" name="dob" value="<%= dob.split("-").reverse().join("-") %>">
                    <p id="dobVal"></p>
                  </div>
                  <div class="form-group col-lg-6 col-md-12 pt-2">
                    <label for="" class="form-label">Gender</label>
                    <div id="gender">
-                   <input class="form-check-input" type="radio" name="gender" id="Male" value="Male" <% if (employee.gender == "Male") { %>
+                   <input class="form-check-input" type="radio" name="gender" id="Male" value="Male" <% if (gender == "Male") { %>
                     checked
                    <% } %>>
                    <label class="form-check-label" for="Male">
                      Male
                    </label>
-                   <input class="form-check-input" type="radio" name="gender" id="Female" value="Female" <% if (employee.gender == "Female") { %>
+                   <input class="form-check-input" type="radio" name="gender" id="Female" value="Female" <% if (gender == "Female") { %>
                     checked
                    <% } %>>
                    <label class="form-check-label" for="Female">
@@ -138,14 +131,14 @@
                    <div class="row pt-1">
                      <div class="form-group col-lg-12 col-md-12 pt-2">
                        <label for="inputPassword4" class="form-label">Address</label>
-                       <input type="text" class="form-control" id="address" placeholder="Address" name="address" value="<%= employee.address %>">
+                       <input type="text" class="form-control" id="address" placeholder="Address" name="address" value="<%= address %>">
                        <p id="addressVal"></p>
                      </div>
                    </div>
                    <div class="row pt-1">
                      <div class="form-group col-lg-12 col-md-12 pt-2">
                        <label for="inputPassword4" class="form-label">Qualifications</label>
-                       <input type="text" class="form-control" id="qualifications" placeholder="Qualifications" name="qualifications" value="<%= employee.qualifications %>">
+                       <input type="text" class="form-control" id="qualifications" placeholder="Qualifications" name="qualifications" value="<%= qualifications %>">
                        <p id="qualificationsVal"></p>
                      </div>
                    </div>
@@ -153,7 +146,7 @@
                      <div class="col-lg-6 col-md-12 pt-2">
                        <label for="" class="form-label">Country</label>
                        <select id="country" class="form-select" name="country">
-                         <option value="<%= employee.country %>"><%= employee.country %></option>
+                         <option value="<%= country %>"><%= country %></option>
                          <option value="India">India</option>
                          <option value="China">China</option>
                          <option value="Canada">Canada</option>
@@ -163,7 +156,7 @@
                      <div class="col-lg-6 col-md-12 pt-2">
                        <label for="" class="form-label">State</label>
                        <select id="state" class="form-select" name="state">
-                         <option value="<%= employee.state %>"><%= employee.state %></option>
+                         <option value="<%= state %>"><%= state %></option>
                          <option value="Kerala">Kerala</option>
                          <option value="Karnataka">Karnataka</option>
                          <option value="Tamilnadu">Tamilnadu</option>
@@ -174,20 +167,15 @@
                    <div class="row pt-1">
                      <div class="form-group col-lg-12 col-md-12 pt-2">
                        <label for="city" class="form-label">City</label>
-                       <input type="text" class="form-control" id="city" placeholder="City" name="city" value="<%= employee.city %>">
+                       <input type="text" class="form-control" id="city" placeholder="City" name="city" value="<%= city %>">
                        <p id="cityVal"></p>
                      </div>
                    </div>
                    <div class="row pt-1">
-                     <div class="form-group col-lg-6 col-md-12 pt-2">
+                     <div class="form-group col-lg-12 col-md-12 pt-2">
                        <label for="username" class="form-label">Username</label>
-                       <input type="text" class="form-control" id="username" placeholder="username" name="username" value="<%= employee.username %>">
+                       <input type="text" class="form-control" id="username" placeholder="username" name="username" value="<%= username %>">
                        <p id="usernameVal"></p>
-                     </div>
-                     <div class="form-group col-lg-6 col-md-12 pt-2">
-                       <label for="password" class="form-label">Password</label>
-                       <input type="password" class="form-control" id="password" placeholder="password" name="password">
-                       <p id="passwordVal" ></p>
                      </div>
                    </div>
                    </div>

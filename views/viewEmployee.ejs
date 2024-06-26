@@ -24,28 +24,28 @@
               <hr class="mt-4">
               <ul class="sidebar-items pt-3">
                 <li class="d-flex align-items-center gap-1" >
-                  <span class="material-symbols-outlined" style="color: white;">
+                  <a href="/admin/dashboard" class="d-flex align-items-center gap-1" style="text-decoration: none;color: white;"> 
+                    <span class="material-symbols-outlined" style="color: white;">
                     home
                     </span>
                     <h6 style="margin: 0;">Dashboard</h6>
+                  </a>
                 </li>
                 <li class="d-flex align-items-center gap-1" >
-                  <span class="material-symbols-outlined" style="color: white;">
-                    bar_chart_4_bars
-                    </span>
-                    <h6 style="margin: 0;">Employees</h6>
-                </li>
-                <li class="d-flex align-items-center gap-1" >
+                  <a href="/admin/profile/" class="d-flex align-items-center gap-1" style="text-decoration: none;color: white;">
                   <span class="material-symbols-outlined" style="color: white;">
                     person
                     </span>
                     <h6 style="margin: 0;">My Profile</h6>
+                    </a>
                 </li>
                 <li class="d-flex align-items-center gap-1" >
+                  <a href="/logout" class="d-flex align-items-center gap-1" style="text-decoration: none;color: white;">
                   <span class="material-symbols-outlined" style="color: white;">
                     lock_open
                     </span>
                     <h6 style="margin: 0;">Logout</h6>
+                  </a>
                 </li>
             </ul>
               </div>
@@ -73,12 +73,25 @@
                       <div class="top-section col-lg-12"> 
                         <img src="/images/Background Image.png" alt="" class="cover-img">
                         <div class="profile-pic">
-                          <img src="/images/avatar/<%= employee.avatar %>" alt="" id="employee-pic">
+                          <form action="/admin/employee/profilePic/<%= employee._id %>" method="post" style="position: relative;" enctype="multipart/form-data">
+                            <input type="file" name="avatar" id="profile" style="display: none;" onchange="this.form.submit()">
+                            <label for="profile" style="position: absolute;bottom: 0;left: 0;right: 0;">
+                              <span class="material-symbols-outlined" style="color:#F4F7FE;">
+                              edit_square
+                              </span>
+                            </label>
+                            <label for="profile">
+                              <img <% if (employee.avatar) { %>
+                                src="/images/avatar/<%= employee.avatar %>"
+                              <% }else{ %>
+                                src="/images/dummy-profile-pic.jpg"
+                                <% } %> alt="" id="employee-pic">
+                            </label>
+                          </form>
                           <h4 id="view-name"><%= employee.firstname  %></h4>
                           <p id="view-email"><%= employee.email %></p>
                           <img src="" alt="">
                         </div>
-                       
                       </div>
                       <div class="row align-items-center justify-content-center m-0 gap-5">
                         <div class="row col-lg-12 gap-2 justify-content-center">

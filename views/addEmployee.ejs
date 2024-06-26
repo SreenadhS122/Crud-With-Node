@@ -68,7 +68,7 @@
                   <div class="addemployee-popup-container p-4" id="addemployeePopup">
                 <div class="addemployee-popup bg-body px-4 py-4" id="addemployee-popup">
                   <div class="d-flex justify-content-between">
-                    <h3 id="form-heading">Edit</h3>
+                    <h3 id="form-heading">Add Employee</h3>
                     <a style="text-decoration: none;" class="close-btn d-flex justify-content-center align-items-center"><span class="material-symbols-outlined">
                       close
                       </span></a>
@@ -79,21 +79,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
                 <% } %>
-               <form class="pt-1" id="employeeForm" action="/admin/addEmployee/" method="post" enctype="multipart/form-data">
+                <hr style="background-color: blue; height: 2px;width: 100%;">
+               <form class="pt-1" id="employeeForm" action="/admin/addEmployee/" method="post">
                    <div class="form-group pt-2">
-                    <label class="justify-content-center d-flex flex-column align-items-center img-upload p-4" id="addemployee-upload" for="avatar">
-                        <label for="avatar" style="cursor: pointer;;"> 
-                        <span class="material-symbols-outlined">
-                            upload_2
-                            </span>
-                    </label>
-                        <input id="avatar" type="file" name="avatar" onchange="imageValidation()">
-                        <h6 style="color:#4318FF;">Upload Image</h6>
-                        <p>PNG, JPG files are allowed</p>
-                        <div class="avatar-preview" id="avatarPreview">
-                        <img id="preview" src="/images/Background Image.png" alt="" style="object-fit: cover;height: 200px;width: 200px; border-radius: 50%;border: 2px solid green;">
-                        </div>
-                    </label>
                        <div class="row pt-3">
                            <div class="w-md-100 col-xl-2 col-lg-2 col-md-12 pt-2">
                                <label for="inputState" class="form-label">Salutation</label>
@@ -118,7 +106,7 @@
                        <div class="row pt-1">
                              <div class="form-row col-lg-6 col-md-12 pt-2">
                        <label for="inputEmail4" class="form-label">Email Address</label>
-                       <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%= email %>">
+                       <input type="text" class="form-control" id="email" placeholder="Email" name="email" value="<%= email %>">
                        <p id="emailVal"></p>
                      </div>
                      <div class="form-group col-lg-6 col-md-12 pt-2">
@@ -203,14 +191,14 @@
                      </div>
                      <div class="form-group col-lg-6 col-md-12 pt-2">
                        <label for="password" class="form-label">Password</label>
-                       <input type="password" class="form-control" id="password" placeholder="password" name="password">
+                       <input type="password" class="form-control" id="password" placeholder="password" name="password" value="<%= password %>">
                        <p id="passwordVal" ></p>
                      </div>
                    </div>
                    </div>
                    <div class="d-flex justify-content-end align-items-center pt-3">
                     <a href="/admin/dashboard" class="btn close-button p-2">Close</a>
-                    <button type="submit" class="btn success-btn mx-1 p-2" id="button-dia">Save Changes</button>
+                    <button type="submit" class="btn success-btn mx-1 p-2" id="button-dia">Add Employee</button>
                     <input type="text" style="display: none;" name="" id="empid">
                   </div>
                  </form>
