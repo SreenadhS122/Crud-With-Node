@@ -1,6 +1,7 @@
 const employees = require('../models/employees');
 const bcrypt = require('bcrypt');
 const otpSend = require('../services/otp');
+const jwt = require('jsonwebtoken');
 const { findByIdAndUpdate } = require('../models/admin');
 let employee,otp;
 
@@ -27,7 +28,7 @@ const register = async (req,res) => {
                     lastname : lastname,
                     email : email,
                     mobile : mobile,
-                    dob : dob.split("-").reverse().join("-"),
+                    dob : dob,
                     gender : gender,
                     address : address,
                     qualifications : qualifications,

@@ -33,7 +33,7 @@
             </a>
           </li>
           <li class="d-flex align-items-center gap-1" >
-            <a href="/admin/profile/" class="d-flex align-items-center gap-1" style="text-decoration: none;color: white;">
+            <a href="/admin/profile/<%= loginUser._id %>" class="d-flex align-items-center gap-1" style="text-decoration: none;color: white;">
             <span class="material-symbols-outlined" style="color: white;">
               person
               </span>
@@ -68,7 +68,9 @@
         </h1>
       </div>
       <div class="search-bar p-2">
-        <input type="search" placeholder="Search" class="px-3 py-1 py-2" id="search">
+        <form action="/admin/searchEmployee" method="post">
+          <input type="search" placeholder="Search" class="px-3 py-1 py-2" id="search" name="search" onchange="this.form.submit()">
+        </form>
         <span class="material-symbols-outlined">
           notifications
           </span>
@@ -101,12 +103,12 @@
           <% if(employee.length){%>
             <% employee.forEach((element,index) => { %>
               <tr class='tableitems'>
-                <th><%= index+((limit-1)*value) %></th>
+                <th><%= value*(ind-1)+index+1 %></th>
                 <td class='img-nd-name'><img class="employee-img" id="picture" <% if (element.avatar) { %>
                   src="/images/avatar/<%= element.avatar %>"
                 <% }else{ %>
                   src="/images/dummy-profile-pic.jpg"
-                  <% } %> alt=""><p style="color: #2B3674;"><%= element.salutation %> <%= element.firstname %> <%= element.lastname %></p></td>
+                  <% } %> alt=""><p style="color: #2B3674;"><%= element.salutation %> <%= element.firstname %> <%= element.lastname %> <% if(element.admin){ %> (Admin) <% } %></p></td>
                 <td><%= element.email %></td>
                 <td><%= element.mobile %></td>
                 <td><%= element.gender %></td>
@@ -138,6 +140,7 @@
                   </p>
                   </a>
                   </li>
+                  <% if(loginUser.super_admin){ %>
                   <li>
                   <a class="detail-items" href="/admin/deleteEmployee/<%= element._id %>">
                   <span class="material-symbols-outlined">
@@ -148,12 +151,37 @@
                   </p>
                   </a>
                   </li>
+                  <% if(!element.admin) {%> 
+                  <li>
+                    <a class="detail-items" href="/admin/makeAdmin/<%= element._id %>">
+                      <span class="material-symbols-outlined">
+                        shield_person
+                        </span>
+                        <p>
+                      Make Admin
+                      </p>
+                      </a>
+                  </li>
+                  <% }else {%>
+                    <li>
+                      <a class="detail-items" href="/admin/makeAdmin/<%= element._id %>">
+                        <span class="material-symbols-outlined">
+                          shield_person
+                          </span>
+                          <p>
+                        Remove Admin
+                        </p>
+                        </a>
+                    </li>
+                    <% } %>
+                  <% } %>
+                 
                 </ul>
               </div>
               <tr>
             <% }) %>
             <% }else{ %>
-              <h3>No employees available</h3>
+              <h3>No employees found</h3>
               <% } %>
         </tbody>
       </table>
@@ -161,15 +189,15 @@
       <nav aria-label="Page navigation example" class="d-flex justify-content-center">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+            <a class="page-link" style="cursor: pointer;" aria-label="Previous" onclick="pagination(1)">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
         <% for(let i=1;i<=limit;i++){ %>
-          <li class="page-item"><a class="page-link" id="pagination-admin" onclick="pagination(<%= i %>)" style="cursor: pointer;"><%= i %></a></li>
+          <li class="page-item"><button class="page-link" id="pagination-admin" onclick="pagination(<%= i %>)" style="cursor: pointer;"><%= i %></button></li>
           <% } %>
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+            <a class="page-link" style="cursor: pointer;" aria-label="Next" onclick="pagination(<%= limit %>)">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>

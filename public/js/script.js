@@ -12,6 +12,11 @@ function limitOfEmployee(){
     window.location.href = `/admin/employeeList/${limit}`;
 }
 function pagination(page){
+    console.log(page);
     const limit = document.getElementById("limit-of-employee").value;
     window.location.href = `/admin/pagination/${limit}/${page}`;
-} 
+}
+function searchEmployee(){
+    const keyword = document.getElementById("search").value;
+    window.location.href = `/admin/searchEmployee/${keyword}`;
+}

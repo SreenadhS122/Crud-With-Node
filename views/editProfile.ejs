@@ -48,10 +48,10 @@
               <div class="d-flex justify-content-between p-5 align-items-center">
                 <div style="width: 100%;justify-content: center;display: flex;flex-direction: column;">
                   <h6 class="txt-light">
-                      Employee/Profile
+                      Employee/Profile/Edit
                   </h6>
                   <h1 class="employee-heading">
-                      MY Profile
+                    Edit Profile
                   </h1>
                   <div class="addemployee-popup-container p-4" id="addemployeePopup">
                 <div class="addemployee-popup bg-body px-4 py-4" id="addemployee-popup">
@@ -106,7 +106,7 @@
                        <div class="row pt-1">
                          <div class="form-row col-lg-6 col-md-12 pt-2">
                    <label for="dob" class="form-label">Date Of Birth</label>
-                   <input type="date" class="form-control" id="dob" name="dob" value="<%= dob.split("-").reverse().join("-") %>">
+                   <input type="date" class="form-control" id="dob" name="dob" value="<%= dob %>">
                    <p id="dobVal"></p>
                  </div>
                  <div class="form-group col-lg-6 col-md-12 pt-2">
