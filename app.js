@@ -4,6 +4,7 @@ const session = require('express-session')
 const cache = require('nocache');
 const logger = require('morgan');
 const cookieParser =  require('cookie-parser');
+const cors = require('cors');
 const {mongo} = require('./dbConnect/dbConnect');
 const loginRoute = require('./routes/login');
 const employeeRoute = require('./routes/employeeRoute');
@@ -25,10 +26,13 @@ app.use(session({
 app.use(cache());
 app.use(logger('dev'));
 app.use(cookieParser());
+app.use(cors({
+    origin : "https://localhost:8080/"
+}));
 app.use('/',loginRoute);
 app.use('/employee',employeeRoute);
 app.use('/admin',adminRoute);
 app.use('/',logoutRoute);
 
 mongo();
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080); 
